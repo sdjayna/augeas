@@ -30,7 +30,7 @@ About: Lens Usage
   > set /files/etc/apache2/sites-available/foo/VirtualHost/*[self::directive="ServerAdmin"]/arg "admin@example.com"
 
 About: Configuration files
-  This lens applies to files in /etc/httpd and /etc/apache2. See <filter>.
+  This lens applies to files in /etc/httpd* and /etc/apache2*. See <filter>.
 
 *)
 
@@ -87,15 +87,15 @@ let rec content = section (content|directive|comment|empty)
 
 let lns = (content|directive|comment|empty)*
 
-let filter = (incl "/etc/apache2/apache2.conf") .
-             (incl "/etc/apache2/httpd.conf") .
-             (incl "/etc/apache2/ports.conf") .
-             (incl "/etc/apache2/conf.d/*") .
-             (incl "/etc/apache2/mods-available/*") .
-             (incl "/etc/apache2/sites-available/*") .
-             (incl "/etc/httpd/conf.d/*.conf") .
-             (incl "/etc/httpd/httpd.conf") .
-             (incl "/etc/httpd/conf/httpd.conf") .
+let filter = (incl "/etc/apache2*/apache2.conf") .
+             (incl "/etc/apache2*/httpd.conf") .
+             (incl "/etc/apache2*/ports.conf") .
+             (incl "/etc/apache2*/conf.d/*") .
+             (incl "/etc/apache2*/mods-available/*") .
+             (incl "/etc/apache2*/sites-available/*") .
+             (incl "/etc/httpd*/conf.d/*.conf") .
+             (incl "/etc/httpd*/httpd.conf") .
+             (incl "/etc/httpd*/conf/httpd.conf") .
              Util.stdexcl
 
 let xfm = transform lns filter
